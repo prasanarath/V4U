@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Event Makers </title>
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        /* Global Styles */
+        body {
+            margin: 0;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            background-color: #fdfdfdbd;
+            color: #333;
+        }
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: #f10808;
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.5)), url(backround.jpg);
+            background-repeat: no-repeat; /* Prevents repetition */
+            background-size: cover; /* Ensures it covers the entire header */
+            background-position: center; /* Centers the image */
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+            position: relative;
+            height: 800px; /* Adjust this value to increase/decrease height */
+        }
+
+        
+        /* Diamond-shaped Logo */
+        header img.logo {
+            width: 120px;
+            height: 120px;
+            position: absolute;
+            left: 20px;
+            top: 35px;
+            object-fit: cover;
+            border-radius: 50%; /* Makes the image circular */
+            overflow: hidden; /* Ensures the image stays within the circular border */
+        }
+
+        header h1 {
+            font-size: 42px; /* Increased heading size */
+            margin-bottom: 10px;
+        }
+
+        header p {
+            font-size: 20px;
+            margin-top: 0;
+        }
+
+        .gallery-container {
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .gallery {
+            display: flex;
+            transition: transform 0.5s ease-in-out; /* Smooth and slightly slower transition */
+        }
+        
+        .gallery-img {
+            width: 100%; /* Each image takes full width */
+            flex-shrink: 30; /* Prevents images from shrinking */
+            margin-right: 10px; /* Space between images */
+            object-fit: cover;
+        }
+        /* Buttons for navigation */
+        .prev, .next {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(15, 14, 14, 0.811);
+            color: white;
+            border: none;
+            font-size: 24px;
+            padding: 10px;
+            cursor: pointer;
+            z-index: 10;
+        }
+
+        .prev {
+            left: 10px;
+        }
+
+        .next {
+            right: 10px;
+        }
+
+        .prev.disabled, .next.disabled {
+            display: none;
+        }
+
+        /* "What We Do" Section Styles */
+        .what-we-do {
+            background-color: #ecf0f1;
+            padding: 60px 20px;
+            text-align: center;
+        }
+        .what-we-do h2 {
+            font-size: 32px; /* Slightly bigger heading */
+            margin-bottom: 20px;
+        }
+        .what-we-do p {
+            font-size: 20px;
+            line-height: 1.6;
+            margin-bottom: 40px;
+        }
+
+        
+        /* Contact Us Section Styles */
+        #contact {
+            background-color: #17866ffe; /* Updated background */
+            color: white; /* Updated font color */
+            padding: 60px 20px;
+        }
+        #contact h2 {
+            font-size: 28px;
+            margin-bottom: 20px;
+        }
+        #contact form {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #486480;
+            padding: 50px;
+            border-radius: 8px;
+        }
+        #contact label {
+            font-size: 18px;
+            margin-bottom: 10px;
+            display: block;
+        }
+        #contact input, #contact textarea {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        #contact button {
+            background-color: #16a085;
+            color: white;
+            font-size: 18px;
+            padding: 12px 20px;
+            border: none;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+        #contact button:hover {
+            background-color: #1abc9c;
+        }
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Plan an Event Section Styling */
+        .plan-event {
+            background-color: #ecf0f1;
+            padding: 60px 20px;
+            text-align: center;
+        }
+
+        .plan-event h2 {
+            font-size: 32px;
+            margin-bottom: 20px;
+        }
+
+        .plan-event p {
+            font-size: 20px;
+            line-height: 1.6;
+            margin-bottom: 40px;
+        }
+
+        .plan-event a {
+            font-size: 18px;
+            color: #1abc9c;
+            text-decoration: none;
+        }
+
+        .plan-event a:hover {
+            text-decoration: underline;
+        }
+
+        /* Footer Styles */
+        footer {
+            background-color: #2c3e50;
+            color: white;
+            padding: 30px 0;
+            text-align: center;
+        }
+        footer p {
+            margin: 5px 0;
+        }
+        .logout-btn {
+            width: 30px;
+            height: 30px; /* Ensure it has a height */
+            border: 0;
+            background-color: #0040ff;
+            color:white;
+            /* Makes it interactive */
+        }
+
+        
+        .button-container {
+            display: flex;
+            justify-content: center;
+            gap: 1111px; /* Space of 100px between buttons */
+            margin-top: 20px;
+        }
+        
+        .btn {
+            width: 150px;
+            height: 60px;
+            border: 0px;
+            background-color: #0040ff;
+            border-radius: 30px;
+            margin-top: 20px; 
+            color: #ffffff;
+            font-size: 20px; /* Slightly larger text */
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        
+        .btn:hover {
+            background-color: #001eff5c;
+        }
+        
+
+        /* welcome username */
+        .welcome-text {
+            font-size: 24px !important; /* Adjust size as needed */
+            font-weight: bold; /* Optional: makes the text bold */
+            color: #000; /* Optional: adjust text color */
+        }  
+        
+        
+
+        .typing-animation {
+            display: inline-block;
+            overflow: hidden;
+            white-space: nowrap;
+            border-right: 4px solid rgba(0, 0, 0, 0);
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; /* Change font */
+            font-size: 24px; /* Change font size */
+        
+            animation: typing 4s steps(40) 1s 1 normal both, blinkCaret 0.75s step-end infinite;
+        }
+    
+        @keyframes typing {
+            from {
+                width: 0;
+            }
+            to {
+                width: 100%;
+            }
+        }
+    
+        @keyframes blinkCaret {
+            50% {
+                border-color: transparent;
+            }
+        }
+
+    </style>
+</head>
+
+<body id="top">
+
+    <!-- Header Section -->
+    <header>
+        <img src="images/logo.png" alt="Company Logo" class="logo">
+        
+        <!-- Login/Signup Button -->
+        <div class="auth-buttons" id="login-signup">
+            <a href="login.html" class="auth-button">Login</a>
+            <a href="signup.html" class="auth-button">Sign Up</a>
+        </div>
+        <div id="logout-container">
+            <button id="logout-btn" onclick="logout()">Logout</button>
+        </div>
+        <div class="overlay">
+            <section id="home">
+                <h1 class="h-primary" style="font-family: 'Verdana', sans-serif; font-size: 24px; font-weight: bold;">
+                    Welcome to V4U , Where every effort counts towards a better tomorrow.
+                </h1>
+                <p style="font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; font-size: 24px;">
+                    Join us in creating a brighter future for all.
+                </p>
+
+
+                <p><br><br><br><h2>
+                    <span class="typing-animation">"Need help? Our dedicated volunteers are here to support you—reach out and let us assist you!"</span>
+                </p>
+                <a href="needHelp.html"><button class="btn" >Need Help</button></a>
+                </h2>
+                </section>
+                <br><br>
+                <h2>
+                    <span class="typing-animation">Join us as a volunteer and make a difference in someone's life! Be a part of our mission to help those in need</span>
+                </h2>
+                <div><a href="signup.html"><button class="btn">Want to help</button></a></div>
+          
+        </div>
+
+    </header>
+    
+
+    <!-- Navigation Menu -->
+    <nav>
+        <ul>
+            <li><a href="#top">Home</a></li> <!-- Updated this link -->
+            <li><a href="#gallery">Our Services</a></li>
+            <li><a href="#whatwedo">What We Do</a></li>
+            <li><a href="#getHelp">Get help</a></li>
+            <li><a href="#contact">Contact Us</a></li>
+            <li><a href="signup.html">Become Volunteer</a></li>
+
+        </ul>
+    </nav>
+
+    <!-- Gallery Section -->
+    <div class="container" id="gallery">
+        <h2 style="text-align:center; font-size:28px; margin-bottom:40px;">Our Services</h2>
+        <div class="gallery-container">
+            <div class="gallery">
+                
+                <img src="images/event1.jpg" alt="Event 1" class="gallery-img">
+                <img src="images/event2.jpg" alt="Event 2" class="gallery-img">
+                <img src="images/event3.jpg" alt="Event 3" class="gallery-img">
+                <img src="images/event4.jpg" alt="Event 4" class="gallery-img">
+                <img src="images/event5.jpg" alt="Event 5" class="gallery-img">
+                <img src="images/event6.jpg" alt="Event 6" class="gallery-img">
+                
+        
+            
+            </div>
+            <button class="prev">&#10094;</button>
+            <button class="next">&#10095;</button>
+        </div>
+    </div>
+
+    <!-- "What We Do" Section -->
+    <div class="what-we-do" id="whatwedo">
+        <h2>What We Do</h2>
+        <p>
+            We are Team V4U, dedicated to making a difference through volunteering. We offer services like grocery assistance, tutoring, and more, all aimed at helping those in need and building stronger communities.        </p>
+    </div>
+    <!-- "Plan an Event" Section -->
+    <div class="gethelp" id="getHelp">
+        <div id="menu">
+                <div class="heading">
+                    <h1>For You</h1>
+                    <h3>We Can Be A </h3>
+                </div>
+                <div class="card">
+                    <img src="image1.jpg">
+                    <div class="details">
+                        <div class="details-sub">
+                            <h5>Family Member</h5>
+                            <h5 class="price"><span>&#128105;&#8205;&#128102;&#8205;&#128107;&#8205;</span></h5>
+                        </div>
+                        <p> This can be a role for people who are active, supportive, and involved in the day-to-day interactions. They help nurture the community spirit and create a welcoming, friendly atmosphere.</p>
+                        <a href="needHelp.html"><button >Need Help</button></a>
+                    </div>
+                </div>
+        
+                <div class="card">
+                    <img src="image2.jpg" alt="">
+                    <div class="details">
+                        <div class="details-sub">
+                            <h5>Protector</h5>
+                            <h5 class="price"> <span>&#128737;</span> </h5>
+                        </div>
+                        <p> A role for people who ensure that the community remains safe, respectful, and free from harmful behavior. They could help moderate discussions, handle disputes, or ensure users follow the guidelines.</p>
+                       <a href="needHelp.html"><button >Need Help</button></a>
+                    </div>
+                </div>
+        
+                <div class="card">
+                    <img src="image3.jpg" alt="">
+                    <div class="details">
+                        <div class="details-sub">
+                            <h5>Advisor</h5>
+                            <h5 class="price"><span>&#128161;</span></h5>
+                        </div>
+                        <p> Individuals who have expertise or experience in specific areas, offering guidance and advice to those who need help. This role could be for mentors or people offering specialized knowledge.</p>
+                       <a href="needHelp.html"> <button >Need Help</button></a>
+                    </div>
+                </div>
+        
+                <div class="card">
+                    <img src="image4.jpg" alt="">
+                    <div class="details">
+                        <div class="details-sub">
+                            <h5>Supporter</h5>
+                            <h5 class="price"> <span>&#129309;</span></h5>
+                        </div>
+                        <p>Someone who may not have deep expertise but is empathetic and helps others with emotional or moral support. They can create an environment where people feel heard and understood.</p>
+                       <a href="needHelp.html"> <button >Need Help</button></a>
+                    </div>
+                </div>
+        
+                <div class="card">
+                    <img src="image5.jpg" alt="">
+                    <div class="details">
+                        <div class="details-sub">
+                            <h5>Organizer</h5>
+                            <h5 class="price"> <span>&#128197;</span></h5>
+                        </div>
+                        <p>People who help plan events, activities, or projects within the community. They could also assist in coordinating volunteers or creating resources that can benefit the group.</p>
+                       <a href="needHelp.html"> <button >Need Help</button></a>
+                    </div>
+                </div>
+        
+                <div class="card">
+                    <img src="image6.jpg" alt="">
+                    <div class="details">
+                        <div class="details-sub">
+                            <h5>Resource Curator</h5>
+                            <h5 class="price"> <span>&#128203;</span> </h5>
+                        </div>
+                        <p>They gather and organize important tools, guides, and articles that are helpful for the community, creating a space where people can easily find useful information</p>
+                       <a href="needHelp.html"> <button>Need Help</button></a>
+                    </div>
+                </div>
+            </div>
+    </div>
+
+   
+
+    <!-- Contact Us Section -->
+    <footer id="contact">
+        <h2>Contact Us</h2>
+        <form action="mailto:info@abcevents.com" method="POST" enctype="multipart/form-data">
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" required>
+
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="message">Message</label>
+            <textarea id="message" name="message" rows="5" required></textarea>
+
+            <button type="submit">Send Message</button>
+        </form>
+        <p>&copy; 2023 ABC Event Management</p>
+        <p>Contact us at <a href="mailto:info@abcevents.com" style="color: #1abc9c;">info@abcevents.com</a> or call (123) 456-7890</p>
+        <p>Follow us on:
+            <a href="#" style="color: #1abc9c;">Facebook</a> | 
+            <a href="#" style="color: #1abc9c;">Instagram</a> | 
+            <a href="#" style="color: #1abc9c;">Twitter</a>
+        </p>
+    </footer>
+
+    <script>
+        let currentIndex = 0;
+        const gallery = document.querySelector('.gallery');
+        const images = document.querySelectorAll('.gallery-img');
+        const prevButton = document.querySelector('.prev');
+        const nextButton = document.querySelector('.next');
+        const totalImages = images.length;
+        const imageWidth = gallery.clientWidth; // Image width based on container width
+        
+        // Function to update the gallery position
+        function updateGalleryPosition() {
+            gallery.style.transform = `translateX(-${currentIndex * imageWidth}px)`;
+            checkButtons();
+        }
+        
+        // Enable/disable navigation buttons
+        function checkButtons() {
+            prevButton.classList.toggle('disabled', currentIndex === 0);
+            nextButton.classList.toggle('disabled', currentIndex === images.length - 1);
+        }
+        
+        // Previous button functionality
+        prevButton.addEventListener('click', () => {
+            if (currentIndex > 0) {
+                currentIndex--;
+                updateGalleryPosition();
+            }
+        });
+        
+        // Next button functionality
+        nextButton.addEventListener('click', () => {
+            if (currentIndex < totalImages - 1) {
+                currentIndex++;
+                updateGalleryPosition();
+            }
+        });
+        
+        // Automatic image transition every 3 seconds
+        setInterval(() => {
+            if (currentIndex < totalImages - 1) {
+                currentIndex++;
+            } else {
+                currentIndex = 0; // Loop back to the first image
+            }
+            updateGalleryPosition();
+        }, 2000); // Move images every 3 seconds
+        
+        // Handle window resize to update image width dynamically
+        window.addEventListener('resize', () => {
+            imageWidth = gallery.clientWidth;
+            updateGalleryPosition(); // Recalculate position on resize
+        });
+        
+
+
+const homeLink = document.querySelector('a[href="#top"]');
+
+homeLink.addEventListener('click', (event) => {
+    event.preventDefault(); // Prevent the default anchor link behavior
+    
+    window.scrollTo({
+        top: 0, // Scroll to the top of the page
+        behavior: 'smooth' // Use smooth scrolling
+    });
+});
+
+
+
+const username = localStorage.getItem('username');
+  const loginContainer = document.getElementById('login-signup');
+
+  if (username) {
+    loginContainer.textContent = `Welcome, ${username}`;
+    loginContainer.style.fontSize = '35px';
+    loginContainer.style.fontWeight = 'bold';
+
+}
+ else {
+    // If not logged in, show login/signup buttons
+    loginContainer.innerHTML = `
+      <a href="login.html" class="auth-button">Login</a>
+      <a href="signup.html" class="auth-button">Sign Up</a>
+    `;
+  }
+     // Function to check session and update UI
+    function checkSession() {
+        fetch('/check-session')
+            .then(response => response.json())
+            .then(data => {
+                if (data.loggedIn) {
+                    // If logged in, show the username and hide login/signup
+                    document.getElementById('login-signup').innerHTML = `<span>Welcome, ${data.username}</span>`;
+                    document.getElementById('logout-container').style.display = 'block';
+                } else {
+                    // If not logged in, show login/signup buttons
+                    document.getElementById('login-signup').innerHTML = `
+                        <a href="login.html" class="auth-button">Login</a>
+                        <a href="signup.html" class="auth-button">Sign Up</a>
+                    `;
+                    document.getElementById('logout-container').style.display = 'none';
+                }
+            })
+            .catch(err => console.error('Error:', err));
+    }
+
+    // Call checkSession when the page loads
+    window.onload = checkSession;
+
+    // Logout function
+    function logout() {
+        fetch('/logout', {
+            method: 'POST'
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.message === 'Logged out successfully') {
+                // Logout successful, reload the page to show login/signup options
+                localStorage.removeItem('username');
+                window.location.href = '/'; // Redirect to the homepage or reload
+            }
+        })
+        .catch(err => console.error('Error:', err));
+    }
+
+    const makeEventMemorableLink = document.getElementById('make-event-memorable');
+    
+    makeEventMemorableLink.addEventListener('click', function (event) {
+        event.preventDefault(); // Prevent the default anchor link behavior
+        
+        if (username) {
+            // If logged in, redirect to the 'selection' page
+            window.location.href = 'selection.html';
+        } else {
+            // If not logged in, redirect to the login page
+            window.location.href = 'login.html';
+        }
+    });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,72 @@
+{
+  "users": [
+    {
+      "username": "admin",
+      "password": "a123"
+    },
+    {
+      "username": "user1",
+      "password": "password1"
+    },
+    {
+      "username": "newuser",
+      "email": "newuser@example.com",
+      "password": "password123"
+    },
+    {
+      "name": "teja",
+      "email": "teja@gmail.com",
+      "username": "teja@123",
+      "password": "112"
+    },
+    {
+      "name": "mukesh",
+      "email": "Prasanapkr@gmail.com",
+      "username": "mukesh112",
+      "password": "123",
+      "location": "gajuwaka "
+    },
+    {
+      "name": "steja",
+      "email": "steja@gmail.com",
+      "username": "gl",
+      "password": "gl",
+      "location": "anakapalli"
+    },
+    {
+      "name": "mukesh",
+      "email": "odasfihjas@gmail.com",
+      "username": "oadfhjkh",
+      "password": "123",
+      "location": "asdf"
+    },
+    {
+      "name": "suresh",
+      "email": "suresh@gmail",
+      "username": "mukesh113",
+      "password": "11",
+      "location": "xyz"
+    },
+    {
+      "name": "aman gupta ",
+      "email": "aman@gmail.com",
+      "username": "amaanRocks",
+      "password": "123",
+      "location": "xyz"
+    },
+    {
+      "name": "fasfd",
+      "email": "afd@gmail.com",
+      "username": "12",
+      "password": "12",
+      "location": "ldskfj;as"
+    },
+    {
+      "name": "fasfd",
+      "email": "afd@gmail.com",
+      "username": "33",
+      "password": "12",
+      "location": "ldskfj;as"
+    }
+  ]
+}

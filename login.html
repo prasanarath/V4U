@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Event Makers</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+      body{
+        background-image: url('backimg.png');
+
+      }
+    </style>
+</head>
+
+<body>
+
+    <div class="login-container">
+        <h2>Login</h2>
+        <form id="login-form">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" placeholder="Enter user name" required>
+            
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" placeholder="Enter password">
+            
+            <button type="submit">Login</button>
+        </form>
+        <p>Don't have an account? <a href="signup.html">Sign up here</a></p>
+    </div>
+    <script>
+        const loginForm = document.getElementById('login-form');
+      
+        loginForm.addEventListener('submit', (event) => {
+          event.preventDefault();
+      
+          const username = document.getElementById('username').value;
+          const password = document.getElementById('password').value;
+      
+          // Send login request to the backend
+          fetch('/login', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ username, password })
+          })
+          .then(response => response.json())
+          .then(data => {
+            if (data.username) {
+              // Successful login, store username in localStorage
+              localStorage.setItem('username', data.username);
+              window.location.href = '/'; // Redirect to the homepage
+            } else {
+              alert('Invalid credentials');
+            }
+          })
+          .catch(error => console.error('Error:', error));
+        });
+      </script>
+
+
+
+</body>
+</html>

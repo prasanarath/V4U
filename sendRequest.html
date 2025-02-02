@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Speech Recognition Search</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f4f4f4;
+            transition: background-color 0.3s ease;
+        }
+        .search-container {
+            display: flex;
+            align-items: center;
+            background: white;
+            padding: 10px;
+            border-radius: 30px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s ease;
+        }
+        input[type="text"] {
+            padding: 12px;
+            width: 300px;
+            font-size: 16px;
+            border: none;
+            border-radius: 30px;
+            outline: none;
+        }
+        .mic-icon {
+            margin-left: 10px;
+            cursor: pointer;
+            font-size: 24px;
+            color: #1210a885;
+            transition: transform 0.01s ease-in-out;
+        }
+        .mic-icon.active {
+            color: red;
+            animation: pulse 1s infinite;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+        .send-button {
+            margin-left: 10px;
+            padding: 10px 20px;
+            background: #007bff;
+            color: white;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .send-button:hover {
+            background: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+<div class="search-container">
+    <input type="text" id="search-bar" placeholder="Type your message..." />
+    <span id="mic-icon" class="mic-icon">🎤</span>
+    <button class="send-button" id="send-button">Send</button>
+</div>
+
+<script>
+    const micIcon = document.getElementById("mic-icon");
+    const searchBar = document.getElementById("search-bar");
+    const body = document.body;
+    let recognition;
+    let isMicActive = false;
+    let currentTranscript = ""; // Store current transcription
+    let micTimeout; // To track 30-second timeout
+    
+    if ('webkitSpeechRecognition' in window) {
+        recognition = new webkitSpeechRecognition();
+        recognition.continuous = false;  // Do not keep listening after one result
+        recognition.interimResults = true; // Provide partial results
+    
+        recognition.onstart = () => {
+            console.log("Speech recognition started...");
+            micTimeout = setTimeout(() => {
+                // Stop the mic after 30 seconds automatically
+                recognition.stop();
+                micIcon.classList.remove("active");
+                body.style.backgroundColor = "#f4f4f4";
+                isMicActive = false;
+                console.log("Mic stopped after 30 seconds.");
+            }, 30000); // 30 seconds timeout
+        };
+    
+        recognition.onend = () => {
+            console.log("Speech recognition ended.");
+            micIcon.classList.remove("active");
+            body.style.backgroundColor = "#f4f4f4";
+            isMicActive = false;
+        };
+    
+        recognition.onresult = (event) => {
+            let transcript = event.results[event.results.length - 1][0].transcript;
+            searchBar.value = transcript; // Set the search bar value to the new transcript
+            console.log("Current Transcript:", transcript);  // Debugging
+        };
+    
+        recognition.onerror = (event) => {
+            console.error("Speech recognition error", event.error);
+            micIcon.classList.remove("active");
+            body.style.backgroundColor = "#f4f4f4";
+            isMicActive = false;
+        };
+    
+        micIcon.onclick = () => {
+            if (isMicActive) {
+                recognition.stop();  // Stop recognition if active
+                clearTimeout(micTimeout);  // Clear the timeout if the user stops the mic early
+                micIcon.classList.remove("active");
+                body.style.backgroundColor = "#f4f4f4";
+            } else {
+                currentTranscript = "";  // Reset the transcript when starting a new one
+                searchBar.value = "";  // Clear the search bar
+    
+                recognition.start();  // Start recognition
+                micIcon.classList.add("active");
+                body.style.backgroundColor = "green";
+            }
+            isMicActive = !isMicActive;
+        };
+    } else {
+        alert("Sorry, your browser does not support speech recognition.");
+    }
+    
+    document.getElementById('send-button').onclick = () => {
+        const message = searchBar.value.trim(); // Trim to remove extra spaces
+    
+        if (message === "") {
+            alert("Please enter a message before sending.");
+            return; // Prevent sending if the message is empty
+        }
+    
+        console.log("Sending message:", message); // Log the message to make sure it's captured
+    
+        fetch('http://localhost:3000/sendMail', { // Update this to match your route
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ message })
+        })
+        .then(response => response.json())
+        .then(data => {
+            alert(data.message);
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+    };
+    
+    
+</script>
+
+</body>
+</html>

@@ -1,0 +1,67 @@
+{
+  "users": [
+    {
+      "name": "John Doe",
+      "email": "johndoe@example.com",
+      "username": "johndoe123",
+      "password": "securepassword",
+      "location": "New York"
+    },
+    {
+      "name": "Alice Smith",
+      "email": "alice@example.com",
+      "username": "alicevolunteer",
+      "password": "anotherpassword",
+      "location": "Los Angeles"
+    },
+    {
+      "name": "rishab",
+      "email": "rishabdhanai121034@gmail.com",
+      "username": "uui",
+      "password": "tty",
+      "location": "xyz"
+    },
+    {
+      "name": "Manas",
+      "email": "maharanamanas1269@gmail.com",
+      "username": "devil69",
+      "password": "3636",
+      "location": "gajuwaka"
+    },
+    {
+      "name": "pkr",
+      "email": "prasanarath26@gmail.com",
+      "username": "iampkr",
+      "password": "1122",
+      "location": "xyz"
+    },
+    {
+      "name": "prasana",
+      "email": "prakr@gmail.com",
+      "username": "mukesh",
+      "password": "345",
+      "location": "anakapalli"
+    },
+    {
+      "name": "rahul",
+      "email": "rahul@gmail.com",
+      "username": "rahul143",
+      "password": "123",
+      "location": "gajuwaka"
+    },
+    {
+      "name": "Steja",
+      "email": "22u41a4252@diet.edu.in",
+      "username": "teja07",
+      "password": "12",
+      "location": "vizag"
+    },
+    {
+      "name": "rath",
+      "email": "prasanpkr143@gmail.com",
+      "username": "iampk",
+      "password": "112",
+      "location": "vizag"
+    }
+  ]
+}

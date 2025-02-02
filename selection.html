@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Planning Questionnaire</title>
+    <style>
+
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f0f0f0;
+    color: #333;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* Align content at the top */
+    position: relative;
+    overflow-y: auto; /* Enable vertical scrolling */
+}
+
+.container {
+    width: 80%;
+    max-width: 1000px;
+    background: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
+    background: rgba(255, 255, 255, 0.9);
+    position: relative;
+    margin-top: 50px; /* Ensure there's some space between the top and the form */
+    margin-bottom: 30px; /* Ensure there's space at the bottom */
+}
+
+h1 {
+    text-align: center;
+    font-size: 2.5em;
+    color: #daa520;
+    font-family: 'Brush Script MT', cursive;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+    margin-top: 50px;
+    animation: fadeInUp 1s ease;
+}
+
+h2 {
+    text-align: center;
+    color: #ff5733;
+    animation: fadeInUp 1.2s ease;
+}
+        
+        /* Overlay */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('backimg.png');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.5;
+            z-index: -1;
+        }
+        
+        .container {
+            width: 80%;
+            max-width: 1000px;
+            background-color: #c3b3f8;
+            
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
+            position: relative;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 2.5em;
+            color: #daa520;
+            font-family: 'Brush Script MT', cursive;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+            margin-top: 50px;
+            animation: fadeInUp 1s ease;
+        }
+
+        h2 {
+            text-align: center;
+            color: #ff5733;
+            animation: fadeInUp 1.2s ease;
+        }
+
+        label {
+            font-weight: bold;
+            color: #333;
+        }
+
+        select, input, textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1em;
+            transition: 0.3s;
+        }
+
+        select:focus, input:focus, textarea:focus {
+            border-color: #ff5733;
+            box-shadow: 0 0 8px rgba(255, 87, 51, 0.5);
+        }
+
+        button {
+            background-color: #ff5733;
+            color: white;
+            padding: 12px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1.2em;
+            display: block;
+            width: 100%;
+            transition: 0.3s;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+            animation: fadeInUp 1.4s ease;
+        }
+
+        button:hover {
+            background-color: #cc4626;
+            transform: scale(1.05);
+        }
+
+        .checkbox-group {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 10px;
+        }
+
+        .checkbox-group label {
+            font-weight: normal;
+        }
+
+        .decoration-options {
+            display: flex;
+            gap: 20px;
+            justify-content: space-around;
+            margin: 10px 0;
+        }
+
+        .decoration-option {
+            text-align: center;
+        }
+
+        .decor-image {
+            width: 100px;
+            height: 100px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .decor-image:hover {
+            transform: scale(1.1);
+        }
+
+        .decoration-option input[type="radio"]:checked + label img {
+            border: 3px solid #ff5733;
+        }
+
+        .logo {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+        }
+
+        .logo img {
+            width: 150px;
+            height: auto;
+            animation: fadeInUp 0.8s ease;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="overlay"></div>
+    
+    <div class="container">
+        <div class="logo">
+            <img src="/images/logo.png" alt="Event Planning Logo">
+        </div>
+
+        <h1>Plan the Event</h1>
+        <h2>Event Planning Questionnaire</h2>
+        <form id="eventForm">
+            <label for="eventType">Type of Event:</label>
+            <select id="eventType" required>
+                <option value="Marriage">Marriage</option>
+                <option value="Birthday">Birthday</option>
+                <option value="Achievement">Achievement</option>
+                <option value="Corporate Meeting">Corporate Meeting</option>
+                <option value="Anniversary">Anniversary</option>
+                <option value="Festival Celebration">Festival Celebration</option>
+                <option value="Baby Shower">Baby Shower</option>
+                <option value="Farewell Party">Farewell Party</option>
+            </select>
+            
+            <label for="location">Location:</label>
+            <input type="text" id="location" placeholder="Enter event location" required>
+
+            <label for="guests">Number of Guests:</label>
+            <input type="number" id="guests" required>
+            
+            <label for="food">Type of Food:</label>
+            <select id="food" required>
+                <option value="Veg">Vegetarian</option>
+                <option value="Non-Veg">Non-Vegetarian</option>
+            </select>
+            
+            <label>Would you like to include?</label>
+            <div class="checkbox-group">
+                <input type="checkbox" id="starters" name="starters"> <label for="starters">Starters</label>
+                <input type="checkbox" id="desserts" name="desserts"> <label for="desserts">Desserts</label>
+                <input type="checkbox" id="beverages" name="beverages"> <label for="beverages">Beverages</label>
+            </div>
+            
+            <label for="duration">Duration of Event (in hours):</label>
+            <input type="number" id="duration" required>
+            
+            <label for="decorations">Type of Decorations:</label>
+            <p>Select your preferred decoration style by clicking on an image below:</p>
+            <div class="decoration-options">
+                <div class="decoration-option">
+                    <input type="radio" id="decor1" name="decorations" value="Floral" hidden>
+                    <label for="decor1">
+                        <img src="flower.jpg" alt="Floral Decoration" class="decor-image">
+                        <span>Floral</span>
+                    </label>
+                </div>
+                <div class="decoration-option">
+                    <input type="radio" id="decor2" name="decorations" value="Traditional" hidden>
+                    <label for="decor2">
+                        <img src="traditional.jpg" alt="Traditional Decoration" class="decor-image">
+                        <span>Traditional</span>
+                    </label>
+                </div>
+                <div class="decoration-option">
+                    <input type="radio" id="decor3" name="decorations" value="Modern" hidden>
+                    <label for="decor3">
+                        <img src="modern.jpg" alt="Modern Decoration" class="decor-image">
+                        <span>Modern</span>
+                    </label>
+                </div>
+                <div class="decoration-option">
+                    <input type="radio" id="decor4" name="decorations" value="Minimalist" hidden>
+                    <label for="decor4">
+                        <img src="minimalist.jpg" alt="Minimalist Decoration" class="decor-image">
+                        <span>Minimalist</span>
+                    </label>
+                </div>
+            </div>
+            
+            <label for="queries">Any Specific Requests or Queries:</label>
+            <textarea id="queries" rows="4" placeholder="Enter any special requests"></textarea>
+            
+            <p>If you have any further queries, contact us at: <strong>+1234567890</strong></p>
+            
+            <button type="button" onclick="submitForm()">Submit</button>
+        </form>
+    </div>
+
+    <script>
+        async function submitForm(event) {
+            event.preventDefault();
+          
+            let eventType = document.getElementById("eventType").value;
+            let location = document.getElementById("location").value;
+            let guests = document.getElementById("guests").value;
+            let food = document.getElementById("food").value;
+            let starters = document.getElementById("starters").checked;
+            let desserts = document.getElementById("desserts").checked;
+            let beverages = document.getElementById("beverages").checked;
+            let duration = document.getElementById("duration").value;
+            let decorations = document.querySelector('input[name="decorations"]:checked') ? document.querySelector('input[name="decorations"]:checked').value : '';
+            let queries = document.getElementById("queries").value;
+          
+            // Create an object to store form data
+            let eventData = {
+              eventType,
+              location,
+              guests,
+              food,
+              include: {
+                starters,
+                desserts,
+                beverages
+              },
+              duration,
+              decorations,
+              queries
+            };
+          
+            // Send the data to the backend
+            try {
+              const response = await fetch('/save-requirements', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(eventData)
+              });
+          
+              const result = await response.json();
+              if (response.ok) {
+                alert("Your event details have been submitted successfully!");
+              } else {
+                alert(`Error: ${result.error}`);
+              }
+            } catch (error) {
+              console.error("Error submitting form:", error);
+              alert("An error occurred while submitting your details.");
+            }
+          }
+          
+    </script>
+</body>
+</html>
