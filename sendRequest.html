@@ -213,7 +213,7 @@
     // Function to play music with 50% volume
     function playMusic() {
         audio = new Audio('music/funMusic.mp3');
-        audio.volume = 0.5; // Set volume to 50%
+        audio.volume = 1; // Set volume to 50%
         audio.loop = true; // Keep playing in loop
         audio.play().catch(error => console.log("Autoplay failed:", error)); // Handle autoplay restrictions
     

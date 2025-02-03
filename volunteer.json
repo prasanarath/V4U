@@ -62,6 +62,13 @@
       "username": "iampk",
       "password": "112",
       "location": "vizag"
+    },
+    {
+      "name": "deepak",
+      "email": "boradeepak143@gmail.com",
+      "username": "deepakkk",
+      "password": "12",
+      "location": "vizag"
     }
   ]
 }
