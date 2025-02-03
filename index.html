@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Event Makers </title>
+    <title>V4U WE FOR YOU</title>
     <link rel="stylesheet" href="css/styles.css">
     <style>
         /* Global Styles */
@@ -20,7 +20,7 @@
         /* Header Styles */
         header {
             background-color: #f10808;
-            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.5)), url(backround.jpg);
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.5)), url(images/backround.jpg);
             background-repeat: no-repeat; /* Prevents repetition */
             background-size: cover; /* Ensures it covers the entire header */
             background-position: center; /* Centers the image */
@@ -118,9 +118,9 @@
         
         /* Contact Us Section Styles */
         #contact {
-            background-color: #17866ffe; /* Updated background */
-            color: white; /* Updated font color */
-            padding: 60px 20px;
+            background-color: #5c9fbab8; /* Updated background */
+            color: rgb(0, 0, 0); /* Updated font color */
+            padding: 40px 20px;
         }
         #contact h2 {
             font-size: 28px;
@@ -129,9 +129,10 @@
         #contact form {
             max-width: 600px;
             margin: 0 auto;
-            background-color: #486480;
+            background-color: #1717165d;
             padding: 50px;
             border-radius: 8px;
+            color: white;
         }
         #contact label {
             font-size: 18px;
@@ -147,7 +148,7 @@
             border-radius: 4px;
         }
         #contact button {
-            background-color: #16a085;
+            background-color: #000000;
             color: white;
             font-size: 18px;
             padding: 12px 20px;
@@ -156,38 +157,10 @@
             border-radius: 4px;
         }
         #contact button:hover {
-            background-color: #1abc9c;
+            background-color: #1900ff;
         }
         html {
             scroll-behavior: smooth;
-        }
-
-        /* Plan an Event Section Styling */
-        .plan-event {
-            background-color: #ecf0f1;
-            padding: 60px 20px;
-            text-align: center;
-        }
-
-        .plan-event h2 {
-            font-size: 32px;
-            margin-bottom: 20px;
-        }
-
-        .plan-event p {
-            font-size: 20px;
-            line-height: 1.6;
-            margin-bottom: 40px;
-        }
-
-        .plan-event a {
-            font-size: 18px;
-            color: #1abc9c;
-            text-decoration: none;
-        }
-
-        .plan-event a:hover {
-            text-decoration: underline;
         }
 
         /* Footer Styles */
@@ -270,6 +243,33 @@
             }
         }
 
+        .about_column img{
+            width: 500px;
+            height: 500px;
+            border-radius: 50%;
+            object-fit: fill;
+            margin: auto;
+          }
+          .about_column{
+            flex: 1;
+          }
+          .about_row{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            padding: 0 100px;
+          }
+          .title{
+            color: #373333;
+            margin-bottom: 30px;
+            padding: 50px 0 30px 0;
+            text-align: center;
+          }
+          /*title name*/
+          .v4u{
+        color: rgb(255, 140, 0);
+          }
     </style>
 </head>
 
@@ -287,10 +287,10 @@
         <div id="logout-container">
             <button id="logout-btn" onclick="logout()">Logout</button>
         </div>
-        <div class="overlay">
+        <div class="overlay">   
             <section id="home">
-                <h1 class="h-primary" style="font-family: 'Verdana', sans-serif; font-size: 24px; font-weight: bold;">
-                    Welcome to V4U , Where every effort counts towards a better tomorrow.
+                <h1 class="h-primary" style="font-family: Segoe U; font-size: 40px; font-weight: bold;">
+                    Welcome to <span class="v4u">V4U</span> , Where every effort counts towards a better tomorrow.
                 </h1>
                 <p style="font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; font-size: 24px;">
                     Join us in creating a brighter future for all.
@@ -319,11 +319,10 @@
         <ul>
             <li><a href="#top">Home</a></li> <!-- Updated this link -->
             <li><a href="#gallery">Our Services</a></li>
-            <li><a href="#whatwedo">What We Do</a></li>
+            <li><a href="#whatwedo">About us</a></li>
             <li><a href="#getHelp">Get help</a></li>
             <li><a href="#contact">Contact Us</a></li>
-            <li><a href="signup.html">Become Volunteer</a></li>
-
+            <li><a href="#" id="dashboard-link">DashBoard</a></li>
         </ul>
     </nav>
 
@@ -350,9 +349,20 @@
 
     <!-- "What We Do" Section -->
     <div class="what-we-do" id="whatwedo">
-        <h2>What We Do</h2>
-        <p>
-            We are Team V4U, dedicated to making a difference through volunteering. We offer services like grocery assistance, tutoring, and more, all aimed at helping those in need and building stronger communities.        </p>
+        <h1 class="title">About us</h1>
+        <div class="about_row">
+            <div class="about_column">
+        <p>Welcome to V4U, a dedicated space created to support and uplift those in need. Our mission is to foster a compassionate community where people with disabilities, elderly individuals, and anyone facing difficult circumstances can find the help, resources, and emotional support they deserve. We believe that every person deserves to live with dignity, respect, and the opportunity to thrive, no matter their challenges. Whether you're seeking assistance, offering a helping hand, or looking to connect with others, our platform is here to provide a safe, welcoming space for all. Together, we can make a meaningful difference in the lives of those who need it most.
+
+        </p>
+    </div>
+    <div class="about_column">
+        <img src="images/logo.png
+        " alt="">
+    </div>
+</div>
+
+
     </div>
     <!-- "Plan an Event" Section -->
     <div class="gethelp" id="getHelp">
@@ -362,7 +372,7 @@
                     <h3>We Can Be A </h3>
                 </div>
                 <div class="card">
-                    <img src="image1.jpg">
+                    <img src="images/image1.jpg">
                     <div class="details">
                         <div class="details-sub">
                             <h5>Family Member</h5>
@@ -374,7 +384,7 @@
                 </div>
         
                 <div class="card">
-                    <img src="image2.jpg" alt="">
+                    <img src="images/image2.jpg" alt="">
                     <div class="details">
                         <div class="details-sub">
                             <h5>Protector</h5>
@@ -386,7 +396,7 @@
                 </div>
         
                 <div class="card">
-                    <img src="image3.jpg" alt="">
+                    <img src="images/image3.jpg" alt="">
                     <div class="details">
                         <div class="details-sub">
                             <h5>Advisor</h5>
@@ -398,7 +408,7 @@
                 </div>
         
                 <div class="card">
-                    <img src="image4.jpg" alt="">
+                    <img src="images/image4.jpg" alt="">
                     <div class="details">
                         <div class="details-sub">
                             <h5>Supporter</h5>
@@ -410,7 +420,7 @@
                 </div>
         
                 <div class="card">
-                    <img src="image5.jpg" alt="">
+                    <img src="images/image5.jpg" alt="">
                     <div class="details">
                         <div class="details-sub">
                             <h5>Organizer</h5>
@@ -422,7 +432,7 @@
                 </div>
         
                 <div class="card">
-                    <img src="image6.jpg" alt="">
+                    <img src="images/image6.jpg" alt="">
                     <div class="details">
                         <div class="details-sub">
                             <h5>Resource Curator</h5>
@@ -440,7 +450,7 @@
     <!-- Contact Us Section -->
     <footer id="contact">
         <h2>Contact Us</h2>
-        <form action="mailto:info@abcevents.com" method="POST" enctype="multipart/form-data">
+        <form action="mailto:info@V4U.com" method="POST" enctype="multipart/form-data">
             <label for="name">Name</label>
             <input type="text" id="name" name="name" required>
 
@@ -452,12 +462,12 @@
 
             <button type="submit">Send Message</button>
         </form>
-        <p>&copy; 2023 ABC Event Management</p>
-        <p>Contact us at <a href="mailto:info@abcevents.com" style="color: #1abc9c;">info@abcevents.com</a> or call (123) 456-7890</p>
+        <p>&copy; 2023 V4U</p>
+        <p>Contact us at <a href="mailto:info@v4u.com" style="color: #040404;">info@V4U.com</a> or call (123) 456-7890</p>
         <p>Follow us on:
-            <a href="#" style="color: #1abc9c;">Facebook</a> | 
-            <a href="#" style="color: #1abc9c;">Instagram</a> | 
-            <a href="#" style="color: #1abc9c;">Twitter</a>
+            <a href="#" style="color: #080808f6;">Facebook</a> | 
+            <a href="#" style="color: #040404;">Instagram</a> | 
+            <a href="#" style="color: #000000;">Twitter</a>
         </p>
     </footer>
 
@@ -537,6 +547,7 @@ const username = localStorage.getItem('username');
     loginContainer.style.fontSize = '35px';
     loginContainer.style.fontWeight = 'bold';
 
+
 }
  else {
     // If not logged in, show login/signup buttons
@@ -560,6 +571,7 @@ const username = localStorage.getItem('username');
                         <a href="login.html" class="auth-button">Login</a>
                         <a href="signup.html" class="auth-button">Sign Up</a>
                     `;
+
                     document.getElementById('logout-container').style.display = 'none';
                 }
             })
@@ -585,19 +597,22 @@ const username = localStorage.getItem('username');
         .catch(err => console.error('Error:', err));
     }
 
-    const makeEventMemorableLink = document.getElementById('make-event-memorable');
-    
-    makeEventMemorableLink.addEventListener('click', function (event) {
-        event.preventDefault(); // Prevent the default anchor link behavior
+    const dashboardLink = document.getElementById('dashboard-link');
+
+    dashboardLink.addEventListener('click', function (event) {
+        event.preventDefault(); // Prevent default link behavior
         
-        if (username) {
-            // If logged in, redirect to the 'selection' page
-            window.location.href = 'selection.html';
+        // Check if the user is logged in (assuming `username` variable holds login state)
+        if (localStorage.getItem('username')) {
+            // User is logged in, redirect to the dashboard
+            window.location.href = 'dashboard.html';
         } else {
-            // If not logged in, redirect to the login page
+            // User is not logged in, redirect to login page
             window.location.href = 'login.html';
         }
     });
+
+
     </script>
 
 </body>

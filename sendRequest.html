@@ -13,7 +13,8 @@
             height: 100vh;
             margin: 0;
             background-color: #f4f4f4;
-            transition: background-color 0.3s ease;
+            
+            transition: background-color 2s ease-in-out;
         }
         .search-container {
             display: flex;
@@ -138,16 +139,19 @@
     }
     
     document.getElementById('send-button').onclick = () => {
-        const message = searchBar.value.trim(); // Trim to remove extra spaces
+        const message = searchBar.value.trim(); // Trim spaces
     
         if (message === "") {
             alert("Please enter a message before sending.");
-            return; // Prevent sending if the message is empty
+            return;
         }
     
-        console.log("Sending message:", message); // Log the message to make sure it's captured
+        // Show pop-up message and auto-play music
+        showPopup();
     
-        fetch('http://localhost:3000/sendMail', { // Update this to match your route
+        console.log("Sending message:", message);
+    
+        fetch('http://localhost:3000/sendMail', { // Update this route accordingly
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -162,8 +166,83 @@
             console.error('Error:', error);
         });
     };
+    let audio; // Define globally to stop it later
+
+    function showPopup() {
+        const existingPopup = document.getElementById("custom-popup");
+        if (existingPopup) existingPopup.remove(); // Remove any existing popup
     
+        const popup = document.createElement('div');
+        popup.id = "custom-popup";
+        popup.style.position = "fixed";
+        popup.style.top = "50%";
+        popup.style.left = "50%";
+        popup.style.transform = "translate(-50%, -50%)";
+        popup.style.background = "white";
+        popup.style.padding = "20px";
+        popup.style.borderRadius = "10px";
+        popup.style.boxShadow = "0px 4px 10px rgba(0, 0, 0, 0.2)";
+        popup.style.textAlign = "center";
+        popup.style.zIndex = "1000";
     
+        popup.innerHTML = `
+            <p style="font-size: 18px; color: #333;">
+                ✅ Soon, someone will reach out to you. Relax and enjoy some music! 🎵
+            </p>
+            <button id="close-popup" style="
+                margin-top: 10px;
+                padding: 10px 20px;
+                background: blue;
+                color: white;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+            ">❌ Close</button>
+        `;
+    
+        document.body.appendChild(popup);
+        document.getElementById('close-popup').addEventListener('click', () => {
+            popup.remove();
+            stopMusic(); // Stop music when popup is closed
+        });
+    
+        // Auto-play music with 50% volume
+        playMusic();
+    }
+    
+    // Function to play music with 50% volume
+    function playMusic() {
+        audio = new Audio('music/funMusic.mp3');
+        audio.volume = 0.5; // Set volume to 50%
+        audio.loop = true; // Keep playing in loop
+        audio.play().catch(error => console.log("Autoplay failed:", error)); // Handle autoplay restrictions
+    
+        // Start changing the background color when music is playing
+        audio.onplaying = () => {
+            setInterval(changeBackground, 3000); // Change color every 1 second
+        };
+    
+        // Reset background color when music stops
+        audio.onended = () => {
+            document.body.style.backgroundColor = "#f4f4f4"; // Reset to original color
+        };
+    }
+    
+    const colors = ["#3498db", "#e74c3c", "#2ecc71", "#f1c40f", "#9b59b6"];
+    let index = 0;
+    
+    function changeBackground() {
+        document.body.style.backgroundColor = colors[index];
+        index = (index + 1) % colors.length;
+    }
+    
+    // Function to stop music
+    function stopMusic() {
+        if (audio) {
+            audio.pause();
+            audio.currentTime = 0; // Reset music
+        }
+    }
 </script>
 
 </body>

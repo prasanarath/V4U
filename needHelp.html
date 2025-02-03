@@ -10,7 +10,7 @@
             background-color: #f0f0f0;
             margin: 0;
             padding: 0;
-            background-image: url('backimg.png');
+            background-image: url('images/backimg.png');
             background-size: cover;
         }
         
@@ -60,9 +60,10 @@
 
         .map-button {
             margin-top: 10px;
+            margin-bottom: 50px;
             padding: 10px;
-            width: 100px;
-            background-color: #0400ff;
+            width: 150px;
+            background-color: #2196F3;
             color: white;
             border: none;
             border-radius: 10px;
@@ -76,9 +77,10 @@
 
         #gpsLink {
             margin-top: 20px;
+            margin-bottom: 50px;
             padding: 10px;
             background-color: #f4f4f4;
-            border: 1px solid #ddd;
+            border: 1px solid #ffffff;
             border-radius: 4px;
             font-size: 14px;
             color: #333;
@@ -110,8 +112,8 @@
         <button type="button" class="map-button" id="preciseLocationButton">Precise Location</button>
 
         <div id="gpsLink" style="display: none;">
-            <label for="gps"> Share the link: </label>
-            <input type="text" id="gps" name="gps" readonly>
+            <label for="gps">Enter the GPS Link:</label>
+            <input type="text" id="gps" name="gps">
         </div>
 
         <button type="submit">Submit</button>
@@ -121,9 +123,12 @@
 
 <script>
     document.getElementById('preciseLocationButton').addEventListener('click', function() {
-        // Redirect to Google Maps with a pre-set location (you can use the current location if needed)
+        // Open Google Maps for the user to select a precise location
         const locationUrl = "https://www.google.com/maps";
         window.open(locationUrl, "_blank");
+
+        // Show the input field for the user to manually enter the GPS link after they get the link from Google Maps
+        document.getElementById('gpsLink').style.display = "block";
     });
 
     document.getElementById('helpForm').addEventListener('submit', function(e) {

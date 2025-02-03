@@ -94,14 +94,15 @@ app.get('/check-session', (req, res) => {
 //storeRequirement
 // Store Requirement Route
 app.post('/storeRequirement', (req, res) => {
-  const { name, mobile, gender, location } = req.body;
+  const { name, mobile, gender, location,gps } = req.body;
 
   // Create the requirement data object
   const requirementData = {
     name, 
     mobile, 
     gender, 
-    location
+    location,
+    gps
   };
 
   const filePath = './requirement.json';
@@ -130,7 +131,7 @@ app.post('/sendMail', (req, res) => {
     if (err) return res.status(500).json({ error: 'Error reading requirement data.' });
 
     const requirement = JSON.parse(reqData)[0]; // Assuming there's only one requirement object
-    const { name: reqName, mobile: reqMobile, location: reqLocation } = requirement;
+    const { name: reqName, mobile: reqMobile, location: reqLocation ,gps:reqgps} = requirement;
 
     fs.readFile('./volunteer.json', 'utf-8', (err, volData) => {
       if (err) return res.status(500).json({ error: 'Error reading volunteer data.' });
@@ -156,8 +157,8 @@ app.post('/sendMail', (req, res) => {
           from: 'iampkr519@gmail.com', // Sender address
           to: volunteer.email,          // Recipient email (volunteer)
           subject: 'Your Help Matters,We Need You!', // Subject line
-          text: `${message}\n\nPerson Details:\nName: ${reqName}\nMobile number: ${reqMobile}\nLocation: ${reqLocation}`, // Message body
-          text: `BE SOMEONE'S WE ----V4U` 
+          text: `UsersMessage:${message}\n\nPerson Details:\nName: ${reqName}\nMobile number: ${reqMobile}\nLocation: ${reqLocation}\nGPS link :${reqgps} \n\n Be someone's 'we'—stand with them, not just beside them`, // Message body
+           
         };
 
         return transporter.sendMail(mailOptions);
