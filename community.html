@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Community Volunteer Board</title>
+    
+    <style>
+        body { 
+            font-family: Arial, sans-serif; 
+            background: #f0f2f5; 
+            text-align: center; 
+            margin: 0; 
+            padding: 0;
+        background-image: url('images/backimg.png');
+
+        }
+
+        h2, h3 {
+            color: #333;
+        }
+
+        .container {
+            width: 50%;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+        }
+
+        input, button {
+            width: 90%;
+            padding: 10px;
+            margin: 8px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        button {
+            background: #0033ff;
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background: #ab01017e;
+        }
+
+        .post-container {
+            width: 50%;
+            margin: auto;
+            margin-top: 20px;
+        }
+
+        .post {
+            border: 2px solid #ccc;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 15px;
+            background: #ffffff;
+            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+            position: relative;
+            animation: fadeIn 1s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .post h4 {
+            color: #007bff;
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        .post p {
+            margin: 5px 0;
+            color: #555;
+        }
+
+        .post button {
+            background: #ff5733;
+            width: auto;
+            padding: 8px 15px;
+            transition: 0.3s ease-in-out;
+            border-radius: 5px;
+        }
+
+        .post button:hover {
+            background: #d43f20;
+            transform: scale(1.1);
+        }
+
+        .post button:disabled {
+            background: gray;
+            cursor: not-allowed;
+        }
+
+        .post button:active {
+            transform: scale(0.95);
+        }
+
+        .post .joined {
+            background-color: #28a745;
+            color: white;
+        }
+
+        .post .joined:hover {
+            background-color: #218838;
+        }
+        h2,h3{
+            color: white;
+            font-family: Georgia, 'Times New Roman', Times, serif;
+            font-size: 30px;
+        }
+        
+    </style>
+</head>
+<body>
+
+
+        <h2>🚀 Community Volunteer Board</h2>
+    
+        <div class="container">
+            <h3>Create a Volunteer Opportunity</h3>
+            <input type="text" id="title" placeholder="Title">
+            <input type="text" id="location" placeholder="Location">
+            <input type="datetime-local" id="time">
+            <input type="number" id="members" placeholder="Members Needed" min="1">
+            <button onclick="createPost()">Post</button>
+        </div>
+    
+        <h3>📌 Available Volunteer Posts</h3>
+        <div id="post-list" class="post-container"></div>
+    
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                // Check if a unique user ID is in localStorage; if not, create and store it.
+                if (!localStorage.getItem('userId')) {
+                    const userId = 'user' + Date.now(); // Create a unique user ID
+                    localStorage.setItem('userId', userId); // Store the user ID in localStorage
+                }
+    
+                loadPosts(); // Load the posts when the page is loaded
+            });
+    
+            function createPost() {
+                const title = document.getElementById('title').value;
+                const location = document.getElementById('location').value;
+                const time = document.getElementById('time').value;
+                const members = document.getElementById('members').value;
+    
+                // Ensure all fields are filled
+                if (!title || !location || !time || !members) {
+                    alert("Please fill all fields.");
+                    return;
+                }
+    
+                const posts = JSON.parse(localStorage.getItem('posts')) || []; // Load existing posts or initialize empty array
+    
+                const newPost = { 
+                    title, 
+                    location, 
+                    time, 
+                    members: parseInt(members), 
+                    joinedUsers: [] // List to track users who joined
+                };
+    
+                posts.push(newPost); // Add the new post to the posts array
+                localStorage.setItem('posts', JSON.stringify(posts)); // Save the posts back to localStorage
+    
+                loadPosts(); // Reload the posts to update the UI
+            }
+    
+            function loadPosts() {
+                const postList = document.getElementById('post-list');
+                postList.innerHTML = ""; // Clear any existing posts
+    
+                const posts = JSON.parse(localStorage.getItem('posts')) || []; // Get posts
+    
+                // If no posts exist, show a message
+                if (posts.length === 0) {
+                    postList.innerHTML = "<p>No posts available. Be the first to create one!</p>";
+                    return;
+                }
+    
+                posts.forEach((post, index) => {
+                    const postElement = document.createElement('div');
+                    postElement.className = "post";
+                    postElement.innerHTML = `
+                        <h4>${post.title}</h4>
+                        <p><strong>📍 Location:</strong> ${post.location}</p>
+                        <p><strong>🕒 Time:</strong> ${post.time}</p>
+                        <p><strong>👥 Members Needed:</strong> <span id="count-${index}">${post.members}</span></p>
+                        <button onclick="joinPost(${index})" id="join-${index}" ${post.members === 0 || post.joinedUsers.includes(localStorage.getItem('userId')) ? "disabled" : ""}>
+                            ${post.joinedUsers.includes(localStorage.getItem('userId')) ? "Joined" : "Add Me In"}
+                        </button>
+                    `;
+                    postList.appendChild(postElement);
+                });
+            }
+    
+            function joinPost(postIndex) {
+                const posts = JSON.parse(localStorage.getItem('posts')); // Get the current posts
+                const userId = localStorage.getItem('userId'); // Get the unique user ID from localStorage
+    
+                // If the post has available slots and the user hasn't joined yet
+                if (posts[postIndex].members > 0 && !posts[postIndex].joinedUsers.includes(userId)) {
+                    posts[postIndex].members -= 1; // Decrease the available members
+                    posts[postIndex].joinedUsers.push(userId); // Add the user to the joined list
+                    localStorage.setItem('posts', JSON.stringify(posts)); // Save the updated posts array
+                    loadPosts(); // Refresh the UI to reflect changes
+                }
+            }
+            function clearAllPosts() {
+                localStorage.removeItem('posts'); 
+                document.getElementById('post-list').innerHTML = "<p>No posts available. Be the first to create one!</p>"; 
+            }
+        </script>
+    
+    </body>
+    </html>

@@ -54,10 +54,10 @@
       "email": "22u41a4252@diet.edu.in",
       "username": "teja07",
       "password": "12",
-      "location": "viag"
+      "location": "vizag"
     },
     {
-      "name": "rath",
+      "name": "prasana rath",
       "email": "22u41a4248@diet.edu.in",
       "username": "iampk",
       "password": "112",
@@ -69,6 +69,13 @@
       "username": "deepakkk",
       "password": "12",
       "location": "vizag"
+    },
+    {
+      "name": "rajesh",
+      "email": "rajeshvippili@gmail.com",
+      "username": "rajesh11",
+      "password": "123",
+      "location": "visakhapatnam"
     }
   ]
 }

@@ -270,6 +270,10 @@
           .v4u{
         color: #FC983E;
           }
+
+
+
+        
     </style>
 </head>
 
@@ -283,7 +287,9 @@
         <div class="auth-buttons" id="login-signup">
             <a href="login.html" class="auth-button">Login</a>
             <a href="signup.html" class="auth-button">Sign Up</a>
+            
         </div>
+
         <div id="logout-container">
             <button id="logout-btn" onclick="logout()">Logout</button>
         </div>
@@ -323,6 +329,7 @@
             <li><a href="#getHelp">Get help</a></li>
             <li><a href="#contact">Contact Us</a></li>
             <li><a href="#" id="dashboard-link">DashBoard</a></li>
+            <li><a href="community.html" id="community-page">Community</a></li>
         </ul>
     </nav>
 
@@ -606,6 +613,20 @@ const username = localStorage.getItem('username');
         if (localStorage.getItem('username')) {
             // User is logged in, redirect to the dashboard
             window.location.href = 'dashboard.html';
+        } else {
+            // User is not logged in, redirect to login page
+            window.location.href = 'login.html';
+        }
+    });
+    const communityLink= document.getElementById('community-page');
+
+    communityLink.addEventListener('click', function (event) {
+        event.preventDefault(); // Prevent default link behavior
+        
+        // Check if the user is logged in (assuming `username` variable holds login state)
+        if (localStorage.getItem('username')) {
+            // User is logged in, redirect to the dashboard
+            window.location.href = 'community.html';
         } else {
             // User is not logged in, redirect to login page
             window.location.href = 'login.html';
