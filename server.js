@@ -157,7 +157,7 @@ app.post('/sendMail', (req, res) => {
           from: 'iampkr519@gmail.com', // Sender address
           to: volunteer.email,          // Recipient email (volunteer)
           subject: 'Your Help Matters,We Need You!', // Subject line
-          text: `UsersMessage:${message}\n\nPerson Details:\nName: ${reqName}\nMobile number: ${reqMobile}\nLocation: ${reqLocation}\nGPS link :${reqgps} \n\n Be someone's 'we'—stand with them, not just beside them`, // Message body
+          text: `UsersMessage:${message}\n\n\t-----------Person Details-----------\nName: ${reqName}\nMobile number: ${reqMobile}\nLocation: ${reqLocation}\nGPS link :${reqgps} \n\n Be someone's 'we'—stand with them, not just beside them`, // Message body
            
         };
 
